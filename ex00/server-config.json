@@ -1,0 +1,7 @@
+{
+	"clientId": "lqoh-bgRkh73bMRYrvXsqiJD54shb6LXAVYPQ6qZOJw",
+	"clientSecretKey": "HxnFSULnr_yvdyGadKI3y6Vg79KRbDZRKab23DMxEdY",
+	"responseType": "code",
+	"scope": "public",
+	"tokenEndpoint": "https://unsplash.com/oauth/token"
+}

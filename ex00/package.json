@@ -1,0 +1,16 @@
+{
+	"name": "project_05",
+	"version": "1.0.0",
+	"description": "A project using Unsplash API",
+	"main": "index.js",
+	"scripts": {
+		"build": "tsc --project tsconfig.json",
+		"start": "python3 -m http.server 5500"
+	},
+	"devDependencies": {
+		"typescript": "^4.9.5"
+	},
+	"author": "",
+	"license": "ISC",
+	"type": "module"
+}
