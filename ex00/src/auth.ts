@@ -7,7 +7,7 @@ fetch('server-config.json')
 		const responseType = config.responseType;
 		const scope = config.scope;
 		const tokenEndpoint = config.tokenEndpoint;
-		const redirectUri = `${window.location.origin}/ex00/callback.html`;
+		const redirectUri = `${window.location.origin}/callback.html`;
 		const authUrl = `https://unsplash.com/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=${responseType}&scope=${scope}&prompt=consent`;
 
 		console.log("redURI: ", redirectUri);
@@ -19,9 +19,12 @@ fetch('server-config.json')
 		});
 
 		// Only handle the authorization code if on the callback page
-		if (window.location.pathname === '/ex00/callback.html') {
+		if (window.location.pathname === '/callback.html') {
 			handleCallback(clientId, clientSecretKey, tokenEndpoint, redirectUri);
+		}else {
+			console.log("Not on callback page, current path:", window.location.pathname);
 		}
+		
 	})
 	.catch(error => console.error('Error loading config:', error));
 
@@ -54,10 +57,34 @@ function handleCallback(clientId: string, clientSecretKey: string, tokenEndpoint
 			// Store the access token securely
 			localStorage.setItem('unsplash_access_token', data.access_token);
 			// Redirect to the main page
-			window.location.href = '/ex00/index.html';
+			window.location.href = '/index.html';
 		})
 		.catch(error => console.error('Error exchanging code for token:', error));
 	} else {
 		console.error('Authorization code not found');
 	}
+}
+
+async function saveFavorite(imageId: string) {
+    const accessToken = localStorage.getItem('unsplash_access_token');
+    if (!accessToken) {
+        alert('You need to log in to save favorites.');
+        return;
+    }
+
+    const url = `https://api.unsplash.com/photos/${imageId}/like`;
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+        }
+    });
+
+    if (response.ok) {
+        alert('Image saved as favorite!');
+    } else {
+        console.error('Error saving favorite:', response.statusText);
+        alert('Failed to save favorite. Please try again.');
+    }
 }

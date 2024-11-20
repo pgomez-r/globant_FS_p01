@@ -8,6 +8,7 @@ interface	UnsplashResult
 	links: {
 		html: string;
 	};
+	id: string;
 }
 //Saving the HTML elements into JS variables
 const	searchForm = document.querySelector("#search-form");
@@ -15,16 +16,26 @@ const	searchBox = document.querySelector("#search-box");
 const	searchResults = document.querySelector("#search-results");
 const	showMore = document.querySelector("#show-more");
 
-let		keyword = ""; //will save the search input
+let		keyword = "";
 let		page = 1;
-let		accessKey = "";
+let		apiClient = "";
 fetch('server-config.json')
 	.then(response => response.json())
 	.then(config => {
-		accessKey = config.clientId; // Assuming clientId is the accessKey
-		console.log("Access Key loaded:", accessKey);
+		apiClient = config.clientId;
 	})
 	.catch(error => console.error('Error loading config:', error));
+
+//SearchForm listener (click/enter = submit)
+if (searchForm)
+{
+	searchForm.addEventListener("submit", (e) => {
+	//Avoid page to reload by itself (I don't fully understand this T_T)
+	e.preventDefault();
+	page = 1;
+	searchImages();
+})
+}
 
 async function	searchImages()
 {
@@ -34,15 +45,13 @@ async function	searchImages()
 		keyword = inputElement.value;
 	}
 	//Compose the URL according to API documentation
-	const	url = `https://api.unsplash.com/search/photos?page=${page}&query=${keyword}&client_id=${accessKey}`;
+	const	url = `https://api.unsplash.com/search/photos?page=${page}&query=${keyword}&client_id=${apiClient}`;
 	//Fetch-response
 	const	response = await fetch(url);
 	const	data = await response.json();
-	console.log(JSON.stringify(data));
 	//If first time search, clean the container
-	if(page===1 && searchResults){
+	if (page === 1 && searchResults)
 		searchResults.innerHTML = "";
-	}
 	const	results: UnsplashResult[] = data.results;
 	//For each reasult, create HTML elements inside search-result div
 	//Element img, element link ('a'), element fav-button
@@ -58,6 +67,7 @@ async function	searchImages()
 		const	favButton = document.createElement("button");
 		favButton.textContent = "Favorite";
 		favButton.classList.add("fav-button");
+		favButton.addEventListener('click', () => saveFavorite(result.id));
 		imageContainer.appendChild(imageLink);//Append the link (with image) to the container
 		imageContainer.appendChild(favButton);//Append the favorite button to the container
 		//add element to the container
@@ -69,17 +79,6 @@ async function	searchImages()
 		const	inputElement = showMore as HTMLInputElement;
 		inputElement.style.display = "block";
 	}
-}
-
-//SearchForm listener (click/enter = submit)
-if (searchForm)
-{
-	searchForm.addEventListener("submit", (e) => {
-	//Avoid page to reload by itself (I don't fully understand this T_T)
-	e.preventDefault();
-	page = 1;
-	searchImages();
-})
 }
 
 //Showmore button listener
