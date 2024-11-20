@@ -1,10 +1,7 @@
-version: '3'
 services:
   app:
     build: .
+    container_name: app_gallery
     ports:
       - "5500:5500"
-    volumes:
-      - .:/usr/src/docker_app
-      - /usr/src/docker_app/node_modules
     command: npm start

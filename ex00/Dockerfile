@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as a parent image
-FROM node:14
+FROM node:16-alpine
 
 # Set the working directory in the container
 WORKDIR /usr/src/docker_app
@@ -14,10 +14,10 @@ RUN npm install
 COPY . .
 
 # Compile TypeScript to JavaScript
-RUN npm run build
+RUN npm run build && ls -la /usr/src/docker_app/build
 
 # Install Python
-RUN apt-get update && apt-get install -y python3
+RUN apk add --no-cache python3
 
 # Expose the port the app runs on
 EXPOSE 5500

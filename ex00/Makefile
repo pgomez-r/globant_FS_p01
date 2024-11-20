@@ -1,20 +1,34 @@
-IMAGE_NAME=app_gallery
-CONTAINER_NAME=app_gallery_container
+CONTAINER_NAME=app_gallery
 PORT=5500
+
+# Full build and run
+all: build run
 
 # Build the Docker container
 build:
-	docker-compose build
+	docker build --no-cache --progress=plain -t ${CONTAINER_NAME} .
 
 # Run the Docker container
 run:
-	docker-compose up
+	docker-compose up -d
 
-# Full build and run
-full: build run
+# Get into Docker container terminal
+shell:
+	docker exec -it ${CONTAINER_NAME} /bin/sh
 
 # Stop and remove the Docker container
-clean:
+stop:
 	docker-compose down
 
-.PHONY: build run stop full clean all
+# Remove all docker images in system
+clean:
+	docker rmi -f $$(docker images -q)
+
+# Remove all stopped containers, unused networks, and dangling images to free up space
+fclean:
+	docker container prune -f
+	docker network prune -f
+	docker image prune -f
+	docker volume prune -f
+
+.PHONY: all build run shell stop clean fclean
