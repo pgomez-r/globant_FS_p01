@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   auth.ts                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/21 11:21:01 by pgomez-r          #+#    #+#             */
+/*   Updated: 2024/11/21 15:52:32 by pgomez-r         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 // Load API credentials and configurations from server-config.json
 fetch('server-config.json')
 	.then(response => response.json())
@@ -14,8 +26,14 @@ fetch('server-config.json')
 		console.log("authURL: ", authUrl);
 
 		// Add event listener to the login button
-		document.getElementById('login-button')?.addEventListener('click', () => {
-			window.location.href = authUrl;
+		document.getElementById('login-button')?.addEventListener('click', async () => {
+			const accessToken = localStorage.getItem('unsplash_access_token');
+			console.log("accestoken: ", accessToken);
+			if (accessToken && await verifyAccessToken(accessToken))
+				alert('Already have access to Unsplash API');
+			else {
+				localStorage.removeItem('unsplash_access_token');
+				window.location.href = authUrl;}
 		});
 
 		// Only handle the authorization code if on the callback page
@@ -60,31 +78,26 @@ function handleCallback(clientId: string, clientSecretKey: string, tokenEndpoint
 			window.location.href = '/index.html';
 		})
 		.catch(error => console.error('Error exchanging code for token:', error));
-	} else {
-		console.error('Authorization code not found');
 	}
+	else
+		console.error('Authorization code not found');
 }
 
-async function saveFavorite(imageId: string) {
-    const accessToken = localStorage.getItem('unsplash_access_token');
-    if (!accessToken) {
-        alert('You need to log in to save favorites.');
-        return;
-    }
+async function verifyAccessToken(accessToken: string): Promise<boolean> {
+	const url = 'https://api.unsplash.com/me';
+	const response = await fetch(url, {
+		method: 'GET',
+		headers: {
+			'Authorization': `Bearer ${accessToken}`
+		}
+	});
 
-    const url = `https://api.unsplash.com/photos/${imageId}/like`;
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${accessToken}`,
-            'Content-Type': 'application/json'
-        }
-    });
-
-    if (response.ok) {
-        alert('Image saved as favorite!');
-    } else {
-        console.error('Error saving favorite:', response.statusText);
-        alert('Failed to save favorite. Please try again.');
-    }
+	if (response.ok) {
+		console.log("Access token is valid.");
+		return (true);
+	}
+	else {
+		console.log("Access token is invalid or expired.");
+		return (false);
+	}
 }
