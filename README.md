@@ -1,4 +1,4 @@
-# 42-Globant Metapilot Project 05
+# 42-Globant Metapilot Project 01
 
 This project is a simple image searcher powered by the Unsplash API. It is not hosted in a domain and has no backend service, so if you want to display and try it, please follow instructions.
 
