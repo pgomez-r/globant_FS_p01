@@ -1,4 +1,4 @@
 /ex00/build
 /ex00/node_modules
 /ex00/*.log
-/ex00/server-config.js
+/ex00/server-config.json

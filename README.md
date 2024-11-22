@@ -18,7 +18,14 @@ This project is a simple image searcher powered by the Unsplash API. It is not h
 	- **Mark all permissions**.
 
 3. **Ensure Configuration File**:
-	Create the necessary configuration file called `server-config.json` in the root directory. The file should look like this:
+	Create the necessary configuration file called `server-config.json` in the root directory. 
+	
+	```sh
+	#Create server configuration json file
+	touch server-config.json
+	```
+
+	The file should look like this:
 	```json
 	{
 		"clientId": "YOUR_UNSPLASH_CLIENT_ID",
