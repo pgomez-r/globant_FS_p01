@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:21:01 by pgomez-r          #+#    #+#             */
-/*   Updated: 2024/11/21 15:52:32 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/11/22 13:48:18 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,16 @@ fetch('server-config.json')
 				localStorage.removeItem('unsplash_access_token');
 				window.location.href = authUrl;}
 		});
-
 		// Only handle the authorization code if on the callback page
-		if (window.location.pathname === '/callback.html') {
+		if (window.location.pathname === '/callback.html')
 			handleCallback(clientId, clientSecretKey, tokenEndpoint, redirectUri);
-		}else {
-			console.log("Not on callback page, current path:", window.location.pathname);
-		}
-		
 	})
 	.catch(error => console.error('Error loading config:', error));
 
 // Function to handle the callback and exchange the authorization code for an access token
-function handleCallback(clientId: string, clientSecretKey: string, tokenEndpoint: string, redirectUri: string) {
-	console.log("actual URL: ", window.location.href);
-
-	// Handle the authorization code in the callback page
+function handleCallback(clientId: string, clientSecretKey: string, tokenEndpoint: string, redirectUri: string)
+{
 	const urlParams = new URLSearchParams(window.location.search);
-	console.log("url after authURL accessed: ", urlParams);
 	const code = urlParams.get('code');
 
 	if (code) {
