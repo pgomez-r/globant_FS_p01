@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:21:32 by pgomez-r          #+#    #+#             */
-/*   Updated: 2024/11/22 13:48:26 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/11/23 20:48:18 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,50 +243,3 @@ function	showRecent()
 			recentLikes.appendChild(imageContainer);
 	});
 }
-
-
-// Example of an Unsplash Result
-// {
-//     "id": "Dwu85P9SOIk",
-//     "created_at": "2016-05-03T11:00:28-04:00",
-//     "updated_at": "2021-05-03T11:00:28-04:00",
-//     "width": 2448,
-//     "height": 3264,
-//     "color": "#6E633A",
-//     "blur_hash": "LFC$yHwc8^$yIAS$%M%00KxukYIp",
-//     "downloads": 1345,
-//     "likes": 24,
-//     "liked_by_user": false,
-//     "description": "A man drinking a coffee.",
-//     "urls": {
-//         "raw": "https://images.unsplash.com/photo-1417325384643-aac51acc9e5d",
-//         "full": "https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?crop=entropy&cs=srgb&fm=jpg&ixid=MnwyNjYzMzl8MHwxfGFsbHwxfHx8fHx8fHwxNjE5NTY3OTY2&ixlib=rb-1.2.1&q=85",
-//         "regular": "https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNjYzMzl8MHwxfGFsbHwxfHx8fHx8fHwxNjE5NTY3OTY2&ixlib=rb-1.2.1&q=80&w=1080",
-//         "small": "https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNjYzMzl8MHwxfGFsbHwxfHx8fHx8fHwxNjE5NTY3OTY2&ixlib=rb-1.2.1&q=80&w=400",
-//         "thumb": "https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNjYzMzl8MHwxfGFsbHwxfHx8fHx8fHwxNjE5NTY3OTY2&ixlib=rb-1.2.1&q=80&w=200"
-//     },
-//     "links": {
-//         "self": "https://api.unsplash.com/photos/Dwu85P9SOIk",
-//         "html": "https://unsplash.com/photos/Dwu85P9SOIk",
-//         "download": "https://unsplash.com/photos/Dwu85P9SOIk/download",
-//         "download_location": "https://api.unsplash.com/photos/Dwu85P9SOIk/download"
-//     }
-// }
-
-//JSON SERVER CONFIG #1
-// {
-// 	"clientId": "lqoh-bgRkh73bMRYrvXsqiJD54shb6LXAVYPQ6qZOJw",
-// 	"clientSecretKey": "HxnFSULnr_yvdyGadKI3y6Vg79KRbDZRKab23DMxEdY",
-// 	"responseType": "code",
-// 	"scope": "public+write_likes",
-// 	"tokenEndpoint": "https://unsplash.com/oauth/token"
-// }
-
-//JSON SERVER CONFIG #2
-// {
-// 	"clientId": "d6jbnVVBNRl3x6-WIJRuIvkupM9l8Dk6ibB7qR-1Of0",
-// 	"clientSecretKey": "5adVc_LD9zFJShDtZbSpUApZGAIRIKTYzPljFmA0P3A",
-// 	"responseType": "code",
-// 	"scope": "public+write_likes",
-// 	"tokenEndpoint": "https://unsplash.com/oauth/token"
-// }

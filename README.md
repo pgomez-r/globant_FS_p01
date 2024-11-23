@@ -18,18 +18,13 @@ This project is a simple image searcher powered by the Unsplash API. It is not h
 	- **Mark all permissions**.
 
 3. **Ensure Configuration File**:
-	Create the necessary configuration file called `server-config.json` in the root directory. 
+	Modify `server-config.json` in the root directory to provide your Unsplash app API credentials.
 	
-	```sh
-	#Create server configuration json file
-	touch server-config.json
-	```
-
 	The file should look like this:
 	```json
 	{
-		"clientId": "YOUR_UNSPLASH_CLIENT_ID",
-		"clientSecret": "YOUR_UNSPLASH_CLIENT_SECRET",
+		"clientId": "YOUR_UNSPLASH_APP_ACCESS_KEY",
+		"clientSecret": "YOUR_UNSPLASH_APP_SECRET_KEY",
 		"responseType": "code",
 		"scope": "public+write_likes",
 		"tokenEndpoint": "https://unsplash.com/oauth/token"

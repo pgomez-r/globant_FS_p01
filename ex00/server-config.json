@@ -1,0 +1,7 @@
+{
+	"clientId": "YOUR_UNSPLASH_APP_ACCESS_KEY",
+	"clientSecret": "YOUR_UNSPLASH_APP_SECRET_KEY",
+	"responseType": "code",
+	"scope": "public+write_likes",
+	"tokenEndpoint": "https://unsplash.com/oauth/token"
+}
