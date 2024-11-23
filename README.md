@@ -16,6 +16,7 @@ This project is a simple image searcher powered by the Unsplash API. It is not h
 	Then go to **Yours Apps** at https://unsplash.com/oauth/applications and configure **Redirect URI & Permissions**.
 	- Add `http://localhost:5500/callback.html` to *Redirect URI* field.
 	- **Mark all permissions**.
+![Screenshot from 2024-11-22 14-35-58](https://github.com/user-attachments/assets/94cbadf5-1407-4180-baad-fb93f4e29c40)
 
 3. **Ensure Configuration File**:
 	Modify `server-config.json` in the root directory to provide your Unsplash app API credentials.
