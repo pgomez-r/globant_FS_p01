@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:21:01 by pgomez-r          #+#    #+#             */
-/*   Updated: 2024/11/22 13:48:18 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/11/23 21:44:31 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@ fetch('server-config.json')
 	.then(response => response.json())
 	.then(config => {
 		const clientId = config.clientId;
-		const clientSecretKey = config.clientSecretKey;
+		const clientSecretKey = config.clientSecret;
 		const responseType = config.responseType;
 		const scope = config.scope;
 		const tokenEndpoint = config.tokenEndpoint;
@@ -24,14 +24,18 @@ fetch('server-config.json')
 
 		console.log("redURI: ", redirectUri);
 		console.log("authURL: ", authUrl);
+		console.log("clientId: ", clientId);
+		console.log("clientSecretKey: ", clientSecretKey);
 
 		// Add event listener to the login button
 		document.getElementById('login-button')?.addEventListener('click', async () => {
 			const accessToken = localStorage.getItem('unsplash_access_token');
 			console.log("accestoken: ", accessToken);
-			if (accessToken && await verifyAccessToken(accessToken))
+			console.log("accesstoken from localStore: ", localStorage.getItem('unsplash_access_token'));
+			if (accessToken && accessToken !== 'undefined' && await verifyAccessToken(accessToken))
 				alert('Already have access to Unsplash API');
 			else {
+				console.log("wrong access token, going to remove it...");
 				localStorage.removeItem('unsplash_access_token');
 				window.location.href = authUrl;}
 		});

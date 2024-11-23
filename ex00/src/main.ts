@@ -6,7 +6,7 @@
 /*   By: pgomez-r <pgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:21:32 by pgomez-r          #+#    #+#             */
-/*   Updated: 2024/11/23 20:48:18 by pgomez-r         ###   ########.fr       */
+/*   Updated: 2024/11/23 21:11:42 by pgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ fetch('server-config.json')
 // Check for access token and set headers
 (async () => {
 	const accessToken = localStorage.getItem('unsplash_access_token');
-	if (accessToken && await verifyAccessToken(accessToken)) {
+	if (accessToken && accessToken !== 'undefined' && await verifyAccessToken(accessToken)) {
 		headers = {
 			...headers,
 			'Authorization': `Bearer ${accessToken}`
@@ -142,7 +142,7 @@ async function	searchImages()
 
 async function saveFavorite(imageId: string, button: HTMLButtonElement, image: UnsplashResult) {
 	const accessToken = localStorage.getItem('unsplash_access_token');
-	if (!accessToken || !(await verifyAccessToken(accessToken))) {
+	if (!accessToken || accessToken == 'undefined' || !(await verifyAccessToken(accessToken))) {
 		alert('You need to log in to save favorites.');
 		return;
 	}
@@ -180,7 +180,7 @@ async function saveFavorite(imageId: string, button: HTMLButtonElement, image: U
 
 async function unlikeFavorite(imageId: string, button: HTMLButtonElement, image: UnsplashResult) {
 	const accessToken = localStorage.getItem('unsplash_access_token');
-	if (!accessToken || !(await verifyAccessToken(accessToken))) {
+	if (!accessToken || accessToken == 'undefined' || !(await verifyAccessToken(accessToken))) {
 		alert('You need to log in to unlike favorites.');
 		return;
 	}
